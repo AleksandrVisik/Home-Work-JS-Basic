@@ -25,16 +25,17 @@ function check(cryptoPassword, userPassword) {
         // console.log("No")
         return false;
     }
-    const halfCryptoPassword = cryptoPassword.length / 2;
-    const leftCryptoPart = cryptoPassword.slice(0, halfCryptoPassword);
-    const leftPartCryptoPassword = leftCryptoPart.split("").reverse();
-    const rightCriptoPart = cryptoPassword.slice(halfCryptoPassword);
-    const rightPartCryptoPassword = rightCriptoPart.split("").reverse();
-    const unCryptoPassword = leftPartCryptoPassword.concat(rightPartCryptoPassword).join("");
+    crypto(cryptoPassword);
+    // const halfCryptoPassword = cryptoPassword.length / 2;
+    // const leftCryptoPart = cryptoPassword.slice(0, halfCryptoPassword);
+    // const leftPartCryptoPassword = leftCryptoPart.split("").reverse();
+    // const rightCriptoPart = cryptoPassword.slice(halfCryptoPassword);
+    // const rightPartCryptoPassword = rightCriptoPart.split("").reverse();
+    // const unCryptoPassword = leftPartCryptoPassword.concat(rightPartCryptoPassword).join("");
     // console.log(leftPartCryptoPassword);
     // console.log(rightPartCryptoPassword);
     // console.log(unCryptoPassword);
-    return cryptoPassword === crypto(userPassword) && unCryptoPassword === userPassword;
+    return cryptoPassword === crypto(userPassword) && crypto(cryptoPassword) === userPassword;
 }
 const passphrase = "purpleschpool";
 const secret = crypto(passphrase);
