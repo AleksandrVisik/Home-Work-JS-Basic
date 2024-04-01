@@ -1,18 +1,23 @@
-const arr = [1, 40, -5, 10, 0,];
-const arr1 = [15, 21, 0, -29, -2, 16];
-function sortArrUp(array) {
+const arr = [1, 40, -5, 10, 0];
+
+function directionArr(firstNum, secondNum, directionUp = true) {
+    if (!directionUp) {
+        return firstNum < secondNum;
+    }
+    return firstNum > secondNum;
+}
+
+function sortArrUp(array, direction) {
     for (let i = 0; i < array.length; i++) {
         for (let j = i + 1; j < array.length; j++) {
-            if (array[i] > array[j]) {
-                [array[i], array[j]] = [array[j], array[i]]
+            const sortArr = directionArr(array[i], array[j], direction)
+            if (sortArr) {
+                [array[i], array[j]] = [array[j], array[i]];
             }
         }
     }
     return array;
 }
-function sortArrDown(array) {
-    const down = sortArrUp(array);
-    return down.reverse();
-}
-console.log(`В порядке возрастания: ${sortArrUp(arr1).join(", ")}`);
-console.log(`В порядке убывания: ${sortArrDown(arr).join(", ")}`);
+console.log(arr); // исходный массив
+console.log(sortArrUp(arr)); // по возрастанию
+console.log(sortArrUp(arr, false)); // по убыванию
