@@ -8,16 +8,18 @@ function directionArr(firstNum, secondNum, directionUp = true) {
 }
 
 function sortArrUp(array, direction) {
-    for (let i = 0; i < array.length; i++) {
-        for (let j = i + 1; j < array.length; j++) {
-            const sortArr = directionArr(array[i], array[j], direction)
+    const arrResult = array.slice();
+    for (let i = 0; i < arrResult.length; i++) {
+        for (let j = i + 1; j < arrResult.length; j++) {
+            const sortArr = directionArr(arrResult[i], arrResult[j], direction)
             if (sortArr) {
-                [array[i], array[j]] = [array[j], array[i]];
+                [arrResult[i], arrResult[j]] = [arrResult[j], arrResult[i]];
             }
         }
     }
-    return array;
+    return arrResult;
 }
 console.log(arr); // исходный массив
 console.log(sortArrUp(arr)); // по возрастанию
 console.log(sortArrUp(arr, false)); // по убыванию
+console.log(arr); // исходный массив после вызова функции
