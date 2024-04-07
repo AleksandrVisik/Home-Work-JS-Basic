@@ -1,4 +1,5 @@
 const dateArray = ["31-05-2022", "тест", "11/12/2023", "00/13/2022", "41/12/2023"];
+
 const dateArray2 = ["31-04-2001", "29/02/2000", "29-02-2001", "00/00/0000", "31.11.2013", "29.02.1996", "day/month/year", "31-06-2024", "07.04.2024"];
 
 function getDates(array, func) {
@@ -31,7 +32,6 @@ function isCorrectDate(array) {
     if (day < 1 || day > 31 || month < 1 || month > 12 || year === 0) {
         return false;
     }
-
 
     const LONG_MONTH_ARRAY = [1, 3, 5, 7, 8, 10, 12];// 31 день в месяце
     if (day === 31 && !LONG_MONTH_ARRAY.includes(month)) {
