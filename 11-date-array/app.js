@@ -3,7 +3,7 @@ const dateArray = ["31-05-2022", "тест", "11/12/2023", "00/13/2022", "41/12/
 const dateArray2 = ["31-04-2001", "29/02/2000", "29-02-2001", "00/00/0000", "31.11.2013", "29.02.1996", "day/month/year", "31-06-2024", "07.04.2024"];
 
 function getDates(array, func) {
-    return array.map(stringToArray).filter(func).flatMap(element => element.join("-"))
+    return array.map(stringToArray).filter(func).map(element => element.join("-"))
 }
 
 function stringToArray(string) {
@@ -38,7 +38,7 @@ function isCorrectDate(array) {
         return false;
     }
 
-    const isLeapYear = (year % 4 === 0 || year % 400 === 0); // високосные года
+    const isLeapYear = year % 4 === 0 || year % 400 === 0; // високосные года
     if (month === 2 && day === 29 && !isLeapYear) {
         return false;
     }
