@@ -12,22 +12,25 @@ const toDoList = {
         let lastId = this.tasks.at(-1)?.id;
         data.id = ++lastId
         this.tasks.push(data);
-        console.log("Задача добавлена");
+        console.log(`Задача id ${data.id} добавлена`);
     },
     deleteTaskByID(id) {
-        this.tasks = this.tasks.filter((task) => task.id !== id);
-        console.log(`Задача id - ${id}, удалена`)
+        const index = this.tasks.findIndex((task) => task.id == id);
+        if (index === -1) {
+            console.log(`Задача id ${id} не удалось найти, введите другой id.`)
+        } else {
+            this.tasks = this.tasks.filter((task) => task.id !== id);
+            console.log(`Задача id ${id}, удалена`);
+        }
     },
     updateTaskById(id, newData) {
         const index = this.tasks.findIndex((task) => task.id == id);
-        const updateTask = [];
-        for (const [key, value] of Object.entries(newData)) {
-            if (value) {
-                updateTask.push(newData);
-            }
+        if (index === -1) {
+            console.log(`Задача id ${id} не удалось найти, введите другой id.`)
+        } else {
+            this.tasks[index] = { ...this.tasks[index], ...newData };
+            console.log(`Задача id ${id}, обновлена`);
         }
-        this.tasks[index] = { ...this.tasks[index], ...newData };
-        console.log(`Задача id - ${id}, обновлена`);
     },
     sortTasksByPriority() {
         this.tasks.sort((task1, task2) => task1.priority - task2.priority);
@@ -76,6 +79,8 @@ toDoList.addTask(newTask4);
 console.log(...toDoList.tasks);
 
 // Удаление задачи
+toDoList.deleteTaskByID(15); //
+console.log(...toDoList.tasks);
 toDoList.deleteTaskByID(2);
 console.log(...toDoList.tasks);
 
@@ -85,6 +90,8 @@ const newData = {
     priority: 5
 };
 toDoList.updateTaskById(3, newData);
+console.log(...toDoList.tasks);
+toDoList.updateTaskById(10, newData);
 console.log(...toDoList.tasks);
 
 toDoList.sortTasksByPriority();
