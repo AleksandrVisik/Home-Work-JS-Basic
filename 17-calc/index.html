@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Простой калькулятор</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text">Простой калькулятор</h1>
+
+      <div class="panel">Введите числа в поля ниже</div>
+      <div class="calc">
+        <input type="number" class="input" name="first_number" />
+        <input type="number" class="input input__last" name="second_number" />
+        <div>
+          <button class="button" onclick="buttonClick(event)">+</button>
+          <button class="button" onclick="buttonClick(event)">-</button>
+          <button class="button" onclick="buttonClick(event)">*</button>
+          <button class="button" onclick="buttonClick(event)">/</button>
+        </div>
+      </div>
+      <div class="notification notification__hidden">Вычисление закончено</div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
