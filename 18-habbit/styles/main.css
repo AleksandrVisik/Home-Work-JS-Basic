@@ -147,7 +147,9 @@ main {
     align-items: center;
     margin-bottom: 12px;
 }
-
+.habbit__newDay{
+    display: none;
+}
 .habbit__day {
     background: rgb(251, 250, 255);
     border-radius: 10px 0 0 10px;
@@ -319,6 +321,7 @@ h2 {
 .icon_active img {
     filter: brightness(0) invert(1);
 }
+
 .popup__form {
     width: 100%;
     display: flex;
@@ -326,6 +329,18 @@ h2 {
     align-items: center;
     gap: 15px;
 }
+
 .popup__form input {
     width: 100%;
+}
+
+.target {
+    color: rgb(92, 7, 240);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 16px;
+}
+
+.target__completed {
+    color:rgb(9, 231, 9);
 }

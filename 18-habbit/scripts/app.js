@@ -14,7 +14,9 @@ const page = {
     },
     content: {
         daysContainer: document.getElementById("days"),
-        nextDay: document.querySelector(".habbit__day")
+        nextDay: document.querySelector(".habbit__day"),
+        target: document.querySelector(".target"),
+        newDay: document.querySelector(".habbit__newDay")
     },
     popup: {
         index: document.getElementById("add-habbit-popup"),
@@ -76,7 +78,6 @@ function validateAndGetFormData(form, fields) {
 
 // render
 function rerenderMenu(activeHabbit) {
-
     // page.menu.innerHTML = ""; рендерит все меню
     for (const habbit of habbits) {
         const existed = document.querySelector(`[menu-habbit-id="${habbit.id}"]`);
@@ -112,11 +113,32 @@ function rerenderHead(activeHabbit) {
     page.header.progressCoverBar.setAttribute("style", `width: ${progress}%`);
 }
 
+function dayTitle(number) {
+    const last_num = number % 10;
+    if (number > 10 && [11, 12, 13, 14].includes(number % 100)) {
+        return "дней";
+    }
+    if (last_num == 1) {
+        return "день";
+    }
+    if ([2, 3, 4].includes(last_num)) {
+        return "дня";
+    }
+    if ([5, 6, 7, 8, 9, 0].includes(last_num)) {
+        return "дней";
+    }
+};
+
 function rerenderContent(activeHabbit) {
+    const userTarget = `<div class="target">В ближайшие ${activeHabbit.target} ${dayTitle(activeHabbit.target)}, ваша цель:</div>`;
+    page.content.target.innerHTML = userTarget;
+    page.content.newDay.classList.remove("habbit__newDay");
     page.content.daysContainer.innerHTML = "";
+
     for (const index in activeHabbit.days) {
         const element = document.createElement("div");
         element.classList.add("habbit");
+        element.classList.remove("habbit__newDay")
         element.innerHTML = `<div class="habbit__day"> День ${Number(index) + 1}</div>
         <div class="habbit__comment">
           ${activeHabbit.days[index].comment}
@@ -125,6 +147,13 @@ function rerenderContent(activeHabbit) {
           <img src="./images/delete.svg" alt="Удалить день ${Number(index) + 1}" />
         </button>`;
         page.content.daysContainer.appendChild(element);
+        page.content.target.innerHTML = "";
+        if (activeHabbit.days.length / activeHabbit.target * 100 === 100) {
+            page.content.target.innerHTML = `<div class="target__completed">Вы достигли своей цели:</div>`;
+            page.content.newDay.classList.add("habbit__newDay")
+        } else {
+            page.content.target.innerHTML = userTarget;
+        }
     }
     page.content.nextDay.innerHTML = `День ${activeHabbit.days.length + 1} `;
 }
@@ -224,8 +253,6 @@ function deleteHabbit() {
     rerender(maxId);
     saveData();
 }
-
-
 
 // init
 (() => {
